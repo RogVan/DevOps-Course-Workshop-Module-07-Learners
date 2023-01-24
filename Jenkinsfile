@@ -7,7 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Dotnet build') {
+        stage('Build backend') {
             agent {
                 docker {
                     image 'mcr.microsoft.com/dotnet/sdk:6.0'
@@ -18,7 +18,7 @@ pipeline {
                 }
             }
         
-        stage('Dotnet test') {
+        stage('Test backend') {
             agent {
                 docker {
                     image 'mcr.microsoft.com/dotnet/sdk:6.0'
@@ -29,7 +29,7 @@ pipeline {
                 }
             }
 
-        stage('Npm install') {
+        stage('Install frontend dependencies') {
             agent {
                 docker {
                     image 'node:17-bullseye'
@@ -42,7 +42,7 @@ pipeline {
             }
         }
         
-        stage('Npm build') {
+        stage('Build frontend') {
             agent {
                 docker {
                     image 'node:17-bullseye'
@@ -55,7 +55,7 @@ pipeline {
             }
         }
 
-        stage('Npm test') {
+        stage('Test frontend') {
             agent {
                 docker {
                     image 'node:17-bullseye'
@@ -68,7 +68,7 @@ pipeline {
             }
         }
 
-        stage('Npm run lint') {
+        stage('Run linter') {
             agent {
                 docker {
                     image 'node:17-bullseye'
