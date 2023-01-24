@@ -63,7 +63,7 @@ pipeline {
             }
             steps {
                 dir('./DotnetTemplate.Web') {
-                    sh 'npm t'
+                    sh 'npm run test-with-coverage'
                 }
             }
         }
