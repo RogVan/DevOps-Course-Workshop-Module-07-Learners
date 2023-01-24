@@ -64,7 +64,7 @@ pipeline {
             steps {
                 dir('./DotnetTemplate.Web') {
                     sh 'npm run test-with-coverage'
-                    publishCoverage adapters: [istanbulCoberturaAdapter('/coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
+                    publishCoverage adapters: [istanbulCoberturaAdapter('./coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
                 }
             }
         }
