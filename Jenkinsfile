@@ -82,9 +82,10 @@ pipeline {
         }
 
         stage('Publish code coverage') {
-            steps {
-                publishCoverage adapters: [istanbulCoberturaAdapter('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
-            }
+            cobertura coberturaReportFile: './DotnetTemplate.Web/coverage/cobertura-coverage.xml'
+            // steps {
+            //     publishCoverage adapters: [istanbulCoberturaAdapter('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
+            // }
         }
     }
 }
