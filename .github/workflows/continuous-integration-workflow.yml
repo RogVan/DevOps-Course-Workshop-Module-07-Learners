@@ -2,7 +2,10 @@ name: Continuous Integration
 on: 
   push:                      # Will make the workflow run every time you push to any branch
     branches:
-      - master
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -32,7 +35,7 @@ jobs:
 
   slack-workflow-status:
     if: always()
-    name: Post workflow status to Slack 
+    name: Post workflow status to Slacks 
     needs: 
       - build
     runs-on: ubuntu-latest
