@@ -10,7 +10,7 @@ pipeline {
         stage('Dotnet build') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/dotnet/sdk'
+                    image 'mcr.microsoft.com/dotnet/sdk:6.0'
                     }
                     }
             steps {
@@ -21,7 +21,7 @@ pipeline {
         stage('Dotnet test') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/dotnet/sdk'
+                    image 'mcr.microsoft.com/dotnet/sdk:6.0'
                     }
                     }
             steps {
