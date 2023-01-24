@@ -81,16 +81,18 @@ pipeline {
             }
         }
 
-        stage('Publish code coverage') {
-            steps {
-                publishCoverage {
-                    adapters: adapters: [istanbulCoberturaAdapter('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')]
-                }
-                // cobertura coberturaReportFile: './DotnetTemplate.Web/coverage/cobertura-coverage.xml'
-            }
-            // steps {
-            //     publishCoverage adapters: [istanbulCoberturaAdapter('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
-            // }
-        }
+        publishCoverage adapters: [istanbulCoberturaAdapter('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
+
+        // stage('Publish code coverage') {
+        //     steps {
+        //         publishCoverage {
+        //             adapters: adapters: [istanbulCoberturaAdapter('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')]
+        //         }
+        //         // cobertura coberturaReportFile: './DotnetTemplate.Web/coverage/cobertura-coverage.xml'
+        //     }
+        //     // steps {
+        //     //     publishCoverage adapters: [istanbulCoberturaAdapter('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
+        //     // }
+        // }
     }
 }
