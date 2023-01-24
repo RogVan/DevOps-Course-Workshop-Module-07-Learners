@@ -3,9 +3,13 @@ pipeline {
 
     stages {
         stage('Npm build & Test') {
-            agent 'node:17-bullseye'
+            agent {
+                docker {
+                    image 'node:17-bullseye'
+                    }
+            }
             steps {
-                npm 'install'
+                sh 'npm install'
             }
         }
         stage('Dotnet build & test') {
