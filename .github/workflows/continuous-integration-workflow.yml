@@ -11,6 +11,18 @@ jobs:
     - name: Build and test DotNet
       uses: Elskom/build-dotnet@v1.1.1
 
-    - name: TypeScript Build
+    - name: TypeScript install
       working-directory: ./DotnetTemplate.Web
       run: npm install
+
+    - name: TypeScript build
+      working-directory: ./DotnetTemplate.Web
+      run: npm build
+
+    - name: Linter run
+      working-directory: ./DotnetTemplate.Web
+      run: npm run lint
+
+    - name: Typescript run tests
+      working-directory: ./DotnetTemplate.Web
+      run: npm t
