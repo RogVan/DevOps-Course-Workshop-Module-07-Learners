@@ -3,7 +3,7 @@ on:
   push:                      # Will make the workflow run every time you push to any branch
     branches:
       - main
-  pull-request:
+  pull_request:
     branches:
       - main
 
