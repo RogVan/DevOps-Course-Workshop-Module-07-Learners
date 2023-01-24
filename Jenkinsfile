@@ -17,7 +17,7 @@ pipeline {
                 // sh 'dotnet build'
             }
         }
-        stage('Npm build & Test') {
+        stage('Npm install') {
             agent {
                 docker {
                     image 'node:17-bullseye'
@@ -26,7 +26,45 @@ pipeline {
             steps {
                 dir('./DotnetTemplate.Web') {
                     sh 'npm install'
-                    sh 'npm build'
+                }
+            }
+        }
+        
+        stage('Npm build') {
+            agent {
+                docker {
+                    image 'node:17-bullseye'
+                    }
+            }
+            steps {
+                dir('./DotnetTemplate.Web') {
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Npm test') {
+            agent {
+                docker {
+                    image 'node:17-bullseye'
+                    }
+            }
+            steps {
+                dir('./DotnetTemplate.Web') {
+                    sh 'npm t'
+                }
+            }
+        }
+
+        stage('Npm run lint') {
+            agent {
+                docker {
+                    image 'node:17-bullseye'
+                    }
+            }
+            steps {
+                dir('./DotnetTemplate.Web') {
+                    sh 'npm run lint'
                 }
             }
         }
