@@ -7,23 +7,34 @@ pipeline {
     }
 
     stages {
-        stage('Dotnet build & test') {
+        stage('Dotnet build') {
             agent {
                 docker {
                     image 'mcr.microsoft.com/dotnet/sdk'
                     }
-            }
+                    }
             steps {
-                echo 'Testing..'
                 sh 'dotnet build'
+                }
             }
-        }
+        
+        stage('Dotnet test') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/dotnet/sdk'
+                    }
+                    }
+            steps {
+                sh 'dotnet test'
+                }
+            }
+
         stage('Npm install') {
             agent {
                 docker {
                     image 'node:17-bullseye'
                     }
-            }
+                }
             steps {
                 dir('./DotnetTemplate.Web') {
                     sh 'npm install'
