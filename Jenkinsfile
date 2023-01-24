@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOTNET_CLI_HOME = '/tmp/dotnet_cli_home'
+        DOTNET_CLI_HOME = '/tmp/DOTNET_CLI_HOME'
+        XDG_CONFIG_HOME = '/tmp'
     }
 
     stages {
@@ -14,7 +15,7 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
-                // sh 'dotnet build'
+                sh 'dotnet build'
             }
         }
         stage('Npm install') {
