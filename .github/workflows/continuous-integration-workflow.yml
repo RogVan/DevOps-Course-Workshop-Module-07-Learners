@@ -1,7 +1,8 @@
 name: Continuous Integration
-on: [push]                      # Will make the workflow run every time you push to any branch
-  branches:
-    - master
+on: 
+  push:                      # Will make the workflow run every time you push to any branch
+    branches:
+      - master
 
 jobs:
   build:
