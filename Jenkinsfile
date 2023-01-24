@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        DOTNET_CLI_HOME = '/tmp/dotnet_cli_home'
+    }
+
     stages {
         stage('Dotnet build & test') {
             agent {
