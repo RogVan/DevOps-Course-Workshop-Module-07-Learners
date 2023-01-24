@@ -14,19 +14,21 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
-                sh 'dotnet build'
+                // sh 'dotnet build'
             }
         }
-        // stage('Npm build & Test') {
-        //     agent {
-        //         docker {
-        //             image 'node:17-bullseye'
-        //             }
-        //     }
-        //     steps {
-        //         sh 'npm install'
-        //         sh 'npm build'
-        //     }
-        // }
+        stage('Npm build & Test') {
+            agent {
+                docker {
+                    image 'node:17-bullseye'
+                    }
+            }
+            steps {
+                dir('./DotnetTemplate.Web') {
+                    sh 'npm install'
+                    sh 'npm build'
+                }
+            }
+        }
     }
 }
