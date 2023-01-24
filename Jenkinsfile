@@ -83,7 +83,7 @@ pipeline {
 
         stage('Publish code coverage') {
             steps {
-                publishCoverage adapters: [cobertura('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
+                publishCoverage adapters: [istanbulCoberturaAdapter('./DotnetTemplate.Web/coverage/cobertura-coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
             }
         }
     }
