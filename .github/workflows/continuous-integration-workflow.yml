@@ -13,4 +13,4 @@ jobs:
 
     - name: TypeScript Build
       working-directory: ./DotnetTemplate.Web
-      uses: alexthemaster/action-build-typescript@v1.3.1
+      run: npm install
