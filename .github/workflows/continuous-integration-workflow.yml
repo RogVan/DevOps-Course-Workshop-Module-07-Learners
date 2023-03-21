@@ -61,6 +61,13 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+  redeploy_azure:
+    name: Triggers Azure to redploy with the latest Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: make request to redeployment url
+        run: curl -dh -X POST ${{ secrets.AZURE_REDEPLOYMENT_WEBHOOK }}
+
   slack-workflow-status:
     if: always()
     name: Post workflow status to Slack
