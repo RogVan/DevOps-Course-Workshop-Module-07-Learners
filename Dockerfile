@@ -1,12 +1,23 @@
-FROM jenkins/jenkins:2.375.2
-USER root
-RUN apt-get update && apt-get install -y lsb-release
-RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
-  https://download.docker.com/linux/debian/gpg
-RUN echo "deb [arch=$(dpkg --print-architecture) \
-  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
-  https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-RUN apt-get update && apt-get install -y docker-ce-cli
-USER jenkins
-RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as base
+
+RUN apt-get -y update && apt-get -y install curl
+RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash - &&\
+apt-get install -y nodejs
+
+COPY . ./src/ 
+
+WORKDIR $HOME/src
+
+RUN dir /src
+RUN dotnet build
+RUN dotnet test
+
+WORKDIR $HOME/src/DotnetTemplate.Web
+
+RUN npm install
+RUN npm run build
+RUN npm t
+RUN npm run lint
+
+EXPOSE 8088
+ENTRYPOINT dotnet run --bind 0.0.0.0.8088
