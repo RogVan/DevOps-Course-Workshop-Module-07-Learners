@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: make request to redeployment url
-        run: curl -dh -X POST --fail ${{ secrets.AZURE_REDEPLOYMENT_WEBHOOK }}
+        run: curl -dh -X POST --fail "${{ secrets.AZURE_REDEPLOYMENT_WEBHOOK }}"
 
   slack-workflow-status:
     if: always()
